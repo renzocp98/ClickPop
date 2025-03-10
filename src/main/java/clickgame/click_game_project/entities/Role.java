@@ -5,20 +5,20 @@ import java.util.List;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToOne;
 
-public class Game {
+public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
-    @OneToMany
-    private List<User> users;
     
-    private int numClicks;
+    private String name;
 
-    public Game(List<User> users) {
+    @ManyToOne
+    private List<User> users;
+
+    public Role(List<User> users) {
         this.users = users;
     }
 
@@ -30,6 +30,14 @@ public class Game {
         this.id = id;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public List<User> getUsers() {
         return users;
     }
@@ -38,12 +46,5 @@ public class Game {
         this.users = users;
     }
 
-    public int getNumClicks() {
-        return numClicks;
-    }
-
-    public void setNumClicks(int numClicks) {
-        this.numClicks = numClicks;
-    }
 
 }
