@@ -1,5 +1,6 @@
 package clickgame.click_game_project.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.GeneratedValue;
@@ -18,8 +19,8 @@ public class Role {
     @ManyToOne
     private List<User> users;
 
-    public Role(List<User> users) {
-        this.users = users;
+    public Role() {
+        this.users = new ArrayList<>();
     }
 
     public int getId() {

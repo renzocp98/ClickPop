@@ -1,11 +1,13 @@
 package clickgame.click_game_project.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Transient;
 
 public class Game {
 
@@ -15,11 +17,13 @@ public class Game {
 
     @OneToMany
     private List<User> users;
-    
-    private int numClicks;
 
-    public Game(List<User> users) {
-        this.users = users;
+    @Transient
+    private int maxClicks;
+    
+
+    public Game() {
+            this.users = new ArrayList<>();
     }
 
     public int getId() {
@@ -37,13 +41,4 @@ public class Game {
     public void setUsers(List<User> users) {
         this.users = users;
     }
-
-    public int getNumClicks() {
-        return numClicks;
-    }
-
-    public void setNumClicks(int numClicks) {
-        this.numClicks = numClicks;
-    }
-
 }

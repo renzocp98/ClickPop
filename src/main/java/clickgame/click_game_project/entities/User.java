@@ -1,5 +1,6 @@
 package clickgame.click_game_project.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -22,8 +23,8 @@ public class User {
 
     
     @OneToMany
-    @JoinColumn(name = "id_gane")
-    private Game game;
+    @JoinColumn(name = "id_game")
+    private List<Game> game;
     
     private String username;
     private String password;
@@ -31,13 +32,25 @@ public class User {
     
     @Transient
     private boolean admin;
+
+    @Transient
+    private int numClicks;
     
     @OneToMany
     @JoinColumn(name = "id_role")
     private List<Role> role;
     
-    public User(List<Role> role, Game game) {
-        this.role = role;
+    public User() {
+        this.role = new ArrayList<>();
+        this.game = new ArrayList<>();
+        
+    }
+    
+    public List<Game> getGame() {
+        return game;
+    }
+
+    public void setGame(List<Game> game) {
         this.game = game;
     }
 
@@ -49,13 +62,7 @@ public class User {
         this.id = id;
     }
 
-    public Game getGame() {
-        return game;
-    }
-
-    public void setGame(Game game) {
-        this.game = game;
-    }
+    
 
     public String getUsername() {
         return username;
@@ -96,6 +103,7 @@ public class User {
     public void setRole(List<Role> role) {
         this.role = role;
     }
+
 
 
 }
