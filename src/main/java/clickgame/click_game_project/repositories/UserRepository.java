@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import clickgame.click_game_project.entities.User;
 
+@Repository
 public interface UserRepository extends CrudRepository<User, Integer>{
 
     @Query("select u.username from User u group by u.username order by u.numClicks desc")

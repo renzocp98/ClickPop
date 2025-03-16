@@ -47,7 +47,7 @@ public class User {
     }
     
     public List<Game> getGame() {
-        return game;
+        return this.game;
     }
 
     public void setGame(List<Game> game) {
@@ -55,17 +55,15 @@ public class User {
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(int id) {
         this.id = id;
     }
 
-    
-
     public String getUsername() {
-        return username;
+        return this.username;
     }
 
     public void setUsername(String username) {
@@ -73,7 +71,7 @@ public class User {
     }
 
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     public void setPassword(String password) {
@@ -81,7 +79,7 @@ public class User {
     }
 
     public String getCountry() {
-        return country;
+        return this.country;
     }
 
     public void setCountry(String country) {
@@ -89,7 +87,7 @@ public class User {
     }
 
     public boolean isAdmin() {
-        return admin;
+        return this.admin;
     }
 
     public void setAdmin(boolean admin) {
@@ -97,7 +95,7 @@ public class User {
     }
 
     public List<Role> getRole() {
-        return role;
+        return this.role;
     }
 
     public void setRole(List<Role> role) {

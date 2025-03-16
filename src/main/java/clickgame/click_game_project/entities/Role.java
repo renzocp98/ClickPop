@@ -24,7 +24,7 @@ public class Role {
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(int id) {
@@ -32,7 +32,7 @@ public class Role {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
@@ -40,7 +40,7 @@ public class Role {
     }
 
     public List<User> getUsers() {
-        return users;
+        return this.users;
     }
 
     public void setUsers(List<User> users) {

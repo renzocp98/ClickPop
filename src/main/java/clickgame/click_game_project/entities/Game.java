@@ -6,7 +6,7 @@ import java.util.List;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Transient;
 
 public class Game {
@@ -15,7 +15,7 @@ public class Game {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToMany
+    @ManyToOne
     private List<User> users;
 
     @Transient
@@ -27,7 +27,7 @@ public class Game {
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(int id) {
@@ -35,7 +35,7 @@ public class Game {
     }
 
     public List<User> getUsers() {
-        return users;
+        return this.users;
     }
 
     public void setUsers(List<User> users) {
