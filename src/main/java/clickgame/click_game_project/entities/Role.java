@@ -1,26 +1,31 @@
 package clickgame.click_game_project.entities;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name = "role")
 public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
+    @Column(unique = true)
     private String name;
 
-    @ManyToOne
+    @OneToMany(mappedBy = "role")
     private List<User> users;
 
     public Role() {
-        this.users = new ArrayList<>();
+        //this.users = new ArrayList<>(); se encarga JPa de cargar los users
     }
 
     public int getId() {
