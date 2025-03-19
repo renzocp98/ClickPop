@@ -22,12 +22,30 @@ public class Game {
     @ManyToOne
     private List<User> users;
 
+    private int numClicks;
+
     @Transient
     private int maxClicks;
     
 
     public Game() {
             this.users = new ArrayList<>();
+    }
+
+    public int getNumClicks() {
+        return numClicks;
+    }
+
+    public int getMaxClicks() {
+        return maxClicks;
+    }
+
+    public void setMaxClicks(int maxClicks) {
+        this.maxClicks = maxClicks;
+    }
+
+    public void setNumClicks(int numClicks) {
+        this.numClicks = numClicks;
     }
 
     public int getId() {
