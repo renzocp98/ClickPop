@@ -3,6 +3,7 @@ package clickgame.click_game_project.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import clickgame.click_game_project.entities.Role;
@@ -10,6 +11,7 @@ import clickgame.click_game_project.entities.User;
 import clickgame.click_game_project.repositories.RoleRepository;
 import clickgame.click_game_project.repositories.UserRepository;
 
+@Service
 public class UserServiceImp implements UserService {
     
     @Autowired
