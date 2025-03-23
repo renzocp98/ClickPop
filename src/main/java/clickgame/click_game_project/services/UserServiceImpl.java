@@ -12,7 +12,7 @@ import clickgame.click_game_project.repositories.RoleRepository;
 import clickgame.click_game_project.repositories.UserRepository;
 
 @Service
-public class UserServiceImp implements UserService {
+public class UserServiceImpl implements UserService {
     
     @Autowired
     private UserRepository userRepository;

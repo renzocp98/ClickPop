@@ -1,27 +1,20 @@
 package clickgame.click_game_project.services;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import clickgame.click_game_project.entities.Game;
 import clickgame.click_game_project.repositories.GameRepository;
-import clickgame.click_game_project.repositories.UserRepository;
 
-@Service
-public class GameServiceImp implements GameService {
-
-    @Autowired
-    private GameRepository gameRepository;
-
-    @Autowired
-    private UserRepository userRepository;
+public class GameWebSocketServiceImpl implements GameWebSocketService{
     
+
+    @Autowired
+    private GameRepository gameRepository;    
+
     @Override
     public void game(LocalDate startGame) {
         
@@ -29,30 +22,39 @@ public class GameServiceImp implements GameService {
         
     }
 
-    private void clickCalculation(){
-        
-    }
 
 
     @Override
-    public boolean isOutOfLimit() {
+    public boolean clickValidation() {
         
         return false;
+    }
+
+
+
+    @Override
+    public boolean isOutOfLimit(int x, int y) {
+        if(x < 0 || x > 200 || y < 0 || y > 200){
+            return true;
+        } return false; 
     }
 
     
 
     @Override
-    public void limitOnClicks() {
-        
+    public void limitOnClicks(int numClicks) {
+        if(numClicks > 1000){
+            
+        }        
         
     }
 
     @Override
-    public void controlScore() {
-        
+    public int controlScore() {
+        return 0;
         
     }
+    
 
     @Transactional
     @Override
@@ -67,10 +69,5 @@ public class GameServiceImp implements GameService {
     public Game save(Game game) {
         return gameRepository.save(game);
     }
-
-
-    
-
-    
 
 }

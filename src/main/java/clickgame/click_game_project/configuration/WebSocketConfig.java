@@ -6,8 +6,9 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer{
 
+    @SuppressWarnings("null")
     @Override
-    public void registerStompEndpoints(@SuppressWarnings("null") StompEndpointRegistry registry) {
+    public void registerStompEndpoints( StompEndpointRegistry registry) {
         registry.addEndpoint("/game-WS")// punto Websocket por donde se conectan 
                 .setAllowedOrigins("*");//permite que se conecte de diversos puntos frontend
                     }
