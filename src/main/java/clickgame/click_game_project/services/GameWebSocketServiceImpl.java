@@ -11,21 +11,18 @@ import clickgame.click_game_project.repositories.GameRepository;
 
 public class GameWebSocketServiceImpl implements GameWebSocketService{
     
+    private int score;
+    
 
     @Autowired
     private GameRepository gameRepository;    
 
-    @Override
-    public void game(LocalDate startGame) {
-        
-
-        
-    }
-
-
 
     @Override
-    public boolean clickValidation() {
+    public boolean clickValidation(int x, int y) {
+        
+        isOutOfLimit(x, y);
+
         
         return false;
     }
@@ -39,20 +36,11 @@ public class GameWebSocketServiceImpl implements GameWebSocketService{
         } return false; 
     }
 
-    
-
-    @Override
-    public void limitOnClicks(int numClicks) {
-        if(numClicks > 1000){
-            
-        }        
-        
-    }
 
     @Override
     public int controlScore() {
+
         return 0;
-        
     }
     
 
@@ -69,5 +57,9 @@ public class GameWebSocketServiceImpl implements GameWebSocketService{
     public Game save(Game game) {
         return gameRepository.save(game);
     }
+
+
+
+   
 
 }

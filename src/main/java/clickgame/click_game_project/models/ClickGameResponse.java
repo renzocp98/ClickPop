@@ -5,8 +5,7 @@ public class ClickGameResponse {
     private boolean valid;
     private int points;
     
-    public ClickGameResponse() {
-    }
+    public ClickGameResponse() {}
 
     public ClickGameResponse(boolean valid, int points) {
         this.valid = valid;

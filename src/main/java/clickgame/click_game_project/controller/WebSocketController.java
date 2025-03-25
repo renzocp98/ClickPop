@@ -13,13 +13,14 @@ import clickgame.click_game_project.services.GameWebSocketService;
 public class WebSocketController {
 
     @Autowired
-    GameWebSocketService gameWebSocketService;
+    private GameWebSocketService gameWebSocketService;
 
-    @MessageMapping("/registerClick")// El frontend envía clicks a "/click/register-click"
+    @MessageMapping("/registerClick")// El frontend envía clicks a "/click/registerClick"
     @SendTo("/game")// La respuesta del backend se envía a "/game"
-    private ClickGameResponse handlerClicks (ClickGameMessage clickGameMessage ){
-
-        boolean isValid = gameWebSocketService.clickValidation();
+    private ClickGameResponse handlerClicks (ClickGameMessage clickGameMessage){
+        int x = clickGameMessage.getX();
+        int y = clickGameMessage.getY();
+        boolean isValid = gameWebSocketService.clickValidation(x, y);
         int points = gameWebSocketService.controlScore();
 
         if (!isValid) {

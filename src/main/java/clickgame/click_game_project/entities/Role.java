@@ -24,9 +24,7 @@ public class Role {
     @OneToMany(mappedBy = "role")
     private List<User> users;
 
-    public Role() {
-        //this.users = new ArrayList<>(); se encarga JPa de cargar los users
-    }
+    public Role() {}
 
     public int getId() {
         return this.id;

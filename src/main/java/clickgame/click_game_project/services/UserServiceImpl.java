@@ -1,5 +1,6 @@
 package clickgame.click_game_project.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,10 +41,16 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void delete(int id) {
-
+        
         Optional<User> userOptional = userRepository.findById(id);
         userOptional.ifPresent(userRepository::delete);
         
+    }
+    
+    @Override
+    @Transactional
+    public List<User> findAll() {
+        return (List<User>)userRepository.findAll();
     }
 
     

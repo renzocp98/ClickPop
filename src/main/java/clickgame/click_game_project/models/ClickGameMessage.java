@@ -4,13 +4,14 @@ public class ClickGameMessage {
 
     private int x;
     private int y;
+    
+    public ClickGameMessage(){}
 
     public ClickGameMessage(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
-    public ClickGameMessage(){}
 
     public int getX() {
         return this.x;
