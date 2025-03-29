@@ -1,6 +1,7 @@
 package clickgame.click_game_project.services;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -23,10 +24,11 @@ public class GameWebSocketServiceImpl implements GameWebSocketService{
     private int height = 200; 
     private int npoint = 100;    
 
+    List<int[]> points = new ArrayList<>();
+
     @Override
     public PointsOnGame RandomPoints() {
 
-        List<int[]> points = new ArrayList<>();
 
         Random random = new Random();
 
@@ -44,14 +46,21 @@ public class GameWebSocketServiceImpl implements GameWebSocketService{
     @Override
     public boolean clickValidation(int x, int y) {
         
-        isOutOfLimit(x, y);
-
+        boolean out = isOutOfLimit(x, y);
+        boolean goodPoint = compareGamePoint(x, y);
         
+        if(!out && goodPoint){
+            return true;
+        }       
         return false;
     }
 
+    public boolean compareGamePoint(int x, int y){
+        int[] pointsOnGame = {x,y};
+        return points.stream().anyMatch(point -> Arrays.equals(point, pointsOnGame));
+    }
 
-
+    
     @Override
     public boolean isOutOfLimit(int x, int y) {
         if(x < 0 || x > 200 || y < 0 || y > 200){
