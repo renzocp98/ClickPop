@@ -22,9 +22,9 @@ Los usuarios se registran, y una vez que comienzan, deben hacer clic rápidament
 
 - **MySQL**: La base de datos está gestionada con **MySQL**, un sistema de gestión de bases de datos relacional. Usamos MySQL para almacenar toda la información de los usuarios, sus puntuaciones, y los registros de las partidas.
 
-**Frontend:(Realizado en Vibe coding)**
+**Frontend:(Proxima implementacion muy simple con IA)**
 
-- **React**: En el frontend, utilizamos **React** para crear una interfaz de usuario dinámica y reactiva. React permite que la aplicación sea rápida y eficiente, actualizando solo los elementos necesarios en la pantalla sin recargar toda la página.
+- **React**: En el frontend, utilizamos **React** para crear una interfaz de usuario dinámica. React permite que la aplicación sea rápida y eficiente, actualizando solo los elementos necesarios en la pantalla sin recargar toda la página. Diseño muy simple ya que no es el objetivo de este proyecto ni se dispone de conocimiento suficiente para desarrollar una interfaz elaborada.
 
 **Tecnologías Adicionales:**
 
