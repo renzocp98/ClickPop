@@ -19,12 +19,12 @@ public class GameWebSocketServiceImpl implements GameWebSocketService{
     @Autowired
     private GameRepository gameRepository;    
 
-
+    private int score = 0;    
     private int width = 200;  
     private int height = 200; 
     private int npoint = 100;    
 
-    List<int[]> points = new ArrayList<>();
+    private List<int[]> points = new ArrayList<>();
 
     @Override
     public PointsOnGame RandomPoints() {
@@ -48,7 +48,7 @@ public class GameWebSocketServiceImpl implements GameWebSocketService{
         
         boolean out = isOutOfLimit(x, y);
         boolean goodPoint = compareGamePoint(x, y);
-        
+
         if(!out && goodPoint){
             return true;
         }       
@@ -70,9 +70,13 @@ public class GameWebSocketServiceImpl implements GameWebSocketService{
 
 
     @Override
-    public int controlScore() {
+    public int controlScore(int x, int y) {
+        
+        if(compareGamePoint(x, y)) {
+            return score++;
+        }
+        return score = score - 3;
 
-        return 0;
     }
     
 
