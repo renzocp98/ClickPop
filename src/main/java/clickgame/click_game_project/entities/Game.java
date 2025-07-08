@@ -20,6 +20,8 @@ public class Game {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    private int score;
+
     
 
     public Game() {
@@ -39,5 +41,13 @@ public class Game {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 }

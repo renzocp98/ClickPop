@@ -7,17 +7,23 @@ import java.util.Optional;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import clickgame.click_game_project.entities.Game;
+import clickgame.click_game_project.entities.User;
 import clickgame.click_game_project.models.PointsOnGame;
 import clickgame.click_game_project.repositories.GameRepository;
+import clickgame.click_game_project.repositories.UserRepository;
 
+@Service
 public class GameWebSocketServiceImpl implements GameWebSocketService{
        
 
     @Autowired
     private GameRepository gameRepository;    
+    @Autowired
+    private UserRepository userRepository;
 
     private int score = 0;    
     private int width = 200;  
@@ -75,7 +81,7 @@ public class GameWebSocketServiceImpl implements GameWebSocketService{
         if(compareGamePoint(x, y)) {
             return score++;
         }
-        return score = score - 3;
+        return score = score - 2;
 
     }
     
@@ -95,6 +101,16 @@ public class GameWebSocketServiceImpl implements GameWebSocketService{
     }
 
 
+    public Game createGame(User user) {
+    
+        User existUser = userRepository.findById(user.getId()).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+    
+        Game game = new Game();
+        game.setUser(existUser);
+        game.setScore(0);
+    
+        return gameRepository.save(game);
+    }
 
    
 

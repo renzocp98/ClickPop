@@ -31,7 +31,7 @@ public class UserController {
     }
 
     
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity<?> register(@Valid @RequestBody User user,BindingResult result){
 
         if (result.hasErrors()) {

@@ -44,7 +44,6 @@ public class UserServiceImpl implements UserService {
         
         Optional<User> userOptional = userRepository.findById(id);
         userOptional.ifPresent(userRepository::delete);
-        
     }
     
     @Override
@@ -53,6 +52,22 @@ public class UserServiceImpl implements UserService {
         return (List<User>)userRepository.findAll();
     }
 
-    
+    @Transactional
+    @Override
+    public Optional<User> update(int id, User user) {
+
+        Optional<User> userOptional = userRepository.findById(id);
+        
+        if(userOptional.isPresent()){
+
+            User userdb = userOptional.orElseThrow();
+            userdb.setUsername(user.getUsername());
+            userdb.setCountry(user.getCountry());
+            return Optional.of(userRepository.save(userdb));
+        }
+        return userOptional;
+
+
+    }
     
 }
