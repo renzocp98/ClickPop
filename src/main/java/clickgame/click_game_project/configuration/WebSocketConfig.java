@@ -15,7 +15,8 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer{
     @Override
     public void registerStompEndpoints( StompEndpointRegistry registry) {
         registry.addEndpoint("/game-WS")// punto Websocket por donde se conectan 
-                .setAllowedOrigins("*");//permite que se conecte de diversos puntos frontend
+                .setAllowedOriginPatterns("*")
+                .withSockJS();//permite que se conecte de diversos puntos frontend
                     }
 
     @SuppressWarnings("null")
