@@ -15,10 +15,14 @@ import clickgame.click_game_project.entities.User;
 import clickgame.click_game_project.models.PointsOnGame;
 import clickgame.click_game_project.repositories.GameRepository;
 import clickgame.click_game_project.repositories.UserRepository;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 
 @Service
 public class GameWebSocketServiceImpl implements GameWebSocketService{
        
+
+    @Autowired
+    private SimpMessagingTemplate messagingTemplate;
 
     @Autowired
     private GameRepository gameRepository;    
@@ -26,27 +30,26 @@ public class GameWebSocketServiceImpl implements GameWebSocketService{
     private UserRepository userRepository;
 
     private int score = 0;    
-    private int width = 200;  
-    private int height = 200; 
+    private int width = 300;  
+    private int height = 300; 
     private int npoint = 100;    
 
     private List<int[]> points = new ArrayList<>();
 
     @Override
     public PointsOnGame RandomPoints() {
+    Random random = new Random();
+    points.clear(); 
 
-
-        Random random = new Random();
-
-        for (int i = 0; i < npoint; i++) {
-            
-            int x = random.nextInt(width);   
-            int y = random.nextInt(height);  
-            points.add(new int[]{x, y});
-        }
-
-        return new PointsOnGame(points);
+    for (int i = 0; i < npoint; i++) {
+        int x = random.nextInt(width);
+        int y = random.nextInt(height);
+        points.add(new int[]{x, y});
     }
+
+    return new PointsOnGame(points);
+}
+
 
 
     @Override
@@ -101,16 +104,23 @@ public class GameWebSocketServiceImpl implements GameWebSocketService{
     }
 
 
+    @Override
     public Game createGame(User user) {
-    
-        User existUser = userRepository.findById(user.getId()).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-    
-        Game game = new Game();
-        game.setUser(existUser);
-        game.setScore(0);
-    
-        return gameRepository.save(game);
+       User existUser = userRepository.findById(user.getId())
+           .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+   
+       Game game = new Game();
+       game.setUser(existUser);
+       game.setScore(0);
+       gameRepository.save(game);
+   
+       PointsOnGame pointsOnGame = RandomPoints();
+   
+       messagingTemplate.convertAndSend("/backsend/points", pointsOnGame);
+   
+       return game;
     }
+
 
    
 

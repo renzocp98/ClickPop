@@ -54,20 +54,20 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public Optional<User> update(int id, User user) {
+    public Optional<User> update(String username, User user) {
 
-        Optional<User> userOptional = userRepository.findById(id);
+        Optional<User> userOptional = userRepository.findByUsername(username);
         
         if(userOptional.isPresent()){
 
             User userdb = userOptional.orElseThrow();
-            userdb.setUsername(user.getUsername());
-            userdb.setCountry(user.getCountry());
+            userdb.setPassword(user.getPassword());
             return Optional.of(userRepository.save(userdb));
         }
         return userOptional;
-
-
     }
     
+    //usar el metodo update para buscaar por Username, no tiene sentido que se busque por id, es solo para la base de datos
+    //Nunca usaremos a nivel externo el id, es para tener un registro de lo que se hace a poder guardaarlo en la BBDD,
+
 }

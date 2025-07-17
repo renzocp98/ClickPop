@@ -9,7 +9,7 @@ public interface UserService {
     User save(User user);
     void delete(int id);
     List<User> findAll();
-    Optional<User>  update(int id, User user);
+    Optional<User>  update(String username, User user);
 
 
 }

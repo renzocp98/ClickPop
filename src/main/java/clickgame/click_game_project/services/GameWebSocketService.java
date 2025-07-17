@@ -6,7 +6,7 @@ import clickgame.click_game_project.entities.User;
 import clickgame.click_game_project.models.PointsOnGame;
 
 public interface GameWebSocketService {
-boolean isOutOfLimit(int x, int y);
+    boolean isOutOfLimit(int x, int y);
     int controlScore(int x, int y);
     boolean clickValidation(int x, int y);
     Game save(Game game);

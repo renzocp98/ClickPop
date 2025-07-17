@@ -16,7 +16,7 @@ public class WebSocketController {
     private GameWebSocketService gameWebSocketService;
 
     @MessageMapping("/registerClick")// El frontend envía clicks a "/click/registerClick"
-    @SendTo("/backsend/game")// La respuesta del backend se envía a "/backsend/game"
+    @SendTo("/backsend/score")// La respuesta del backend se envía a "/backsend/game"
     private ClickGameResponse handlerClicks (ClickGameMessage clickGameMessage){
         int x = clickGameMessage.getX();
         int y = clickGameMessage.getY();

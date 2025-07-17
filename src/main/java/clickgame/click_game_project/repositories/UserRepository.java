@@ -1,6 +1,7 @@
 package clickgame.click_game_project.repositories;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -13,6 +14,8 @@ public interface UserRepository extends CrudRepository<User, Integer>{
 
     @Query("select u.username from User u , Game g group by u.username")
     List<User> rankUsers();
+
+    Optional<User> findByUsername(String Username);
     
    // @Query("select u.username from User u , Game g where u.country = ?1 group by u.username")
     //List<User> rankUsersPerCountry(String country);
