@@ -1,7 +1,6 @@
 package clickgame.click_game_project.services;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -33,18 +32,19 @@ public class GameWebSocketServiceImpl implements GameWebSocketService{
     private int width = 300;  
     private int height = 300; 
     private int npoint = 100;    
+    private boolean goodPoint;
 
     private List<int[]> points = new ArrayList<>();
 
     @Override
     public PointsOnGame RandomPoints() {
-    Random random = new Random();
-    points.clear(); 
+        Random random = new Random();
+        points.clear(); 
 
-    for (int i = 0; i < npoint; i++) {
-        int x = random.nextInt(width);
-        int y = random.nextInt(height);
-        points.add(new int[]{x, y});
+        for (int i = 0; i < npoint; i++) {
+            int x = random.nextInt(width);
+            int y = random.nextInt(height);
+            points.add(new int[]{x, y});
     }
 
     return new PointsOnGame(points);
@@ -56,7 +56,7 @@ public class GameWebSocketServiceImpl implements GameWebSocketService{
     public boolean clickValidation(int x, int y) {
         
         boolean out = isOutOfLimit(x, y);
-        boolean goodPoint = compareGamePoint(x, y);
+        goodPoint = compareGamePoint(x, y);
 
         if(!out && goodPoint){
             return true;
@@ -64,15 +64,22 @@ public class GameWebSocketServiceImpl implements GameWebSocketService{
         return false;
     }
 
-    public boolean compareGamePoint(int x, int y){
-        int[] pointsOnGame = {x,y};
-        return points.stream().anyMatch(point -> Arrays.equals(point, pointsOnGame));
-    }
+   @Override
+    public boolean compareGamePoint(int x, int y) {
+        int radiusSquared = 8 * 8;
+
+        return points.stream().anyMatch(point -> {
+            int dx = x - point[0];
+            int dy = y - point[1];
+            return dx * dx + dy * dy <= radiusSquared;
+        });
+}
+
 
     
     @Override
     public boolean isOutOfLimit(int x, int y) {
-        if(x < 0 || x > 200 || y < 0 || y > 200){
+        if(x < 0 || x > 300 || y < 0 || y > 300){
             return true;
         } return false; 
     }
@@ -81,7 +88,7 @@ public class GameWebSocketServiceImpl implements GameWebSocketService{
     @Override
     public int controlScore(int x, int y) {
         
-        if(compareGamePoint(x, y)) {
+        if(goodPoint) {
             return score++;
         }
         return score = score - 2;

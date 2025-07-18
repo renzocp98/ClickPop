@@ -13,4 +13,5 @@ public interface GameWebSocketService {
     void delete(int id);
     PointsOnGame RandomPoints();
     Game createGame(User user);
+    boolean compareGamePoint(int x, int y);
 }
