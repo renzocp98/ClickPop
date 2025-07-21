@@ -10,6 +10,8 @@ public interface UserService {
     void delete(int id);
     List<User> findAll();
     Optional<User>  update(String username, User user);
+    User findByUsername (String username);
+
 
 
 }
