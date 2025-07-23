@@ -1,7 +1,7 @@
 package clickgame.click_game_project.controller;
 
 import java.util.List;
-import java.util.Optional;
+//import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -51,19 +51,19 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(user));
     }
 
-    @PostMapping("/updatePSW")
-    public ResponseEntity<?> updatePassword(@Valid @RequestBody User user, BindingResult result){
-        
-        if (result.hasErrors()) {
-            return ResponseEntity.badRequest().body("Error en el cambio de contraseña");
-        }
-        Optional<User> userOptional = userService.update(user.getPassword(), user);
-        if(userOptional.isPresent()){
-            
-            return ResponseEntity.status(HttpStatus.CREATED).body(userService.update(user.getPassword(), user));
-
-        }
-        return ResponseEntity.notFound().build();
-
-    }
+    //@PostMapping("/updatePSW")
+    //public ResponseEntity<?> updatePassword(@Valid @RequestBody User user, BindingResult result){
+    //    
+    //    if (result.hasErrors()) {
+    //        return ResponseEntity.badRequest().body("Error en el cambio de contraseña");
+    //    }
+    //    Optional<User> userOptional = userService.update(user.getPassword(), user);
+    //    if(userOptional.isPresent()){
+    //        
+    //        return ResponseEntity.status(HttpStatus.CREATED).body(userService.update(user.getPassword(), user));
+//
+    //    }
+    //    return ResponseEntity.notFound().build();
+//
+    //}
 }

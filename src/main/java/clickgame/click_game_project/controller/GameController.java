@@ -23,7 +23,7 @@ private GameWebSocketService gameWebSocketService;
 
 
 @PostMapping("/create")
-public ResponseEntity<?> createGame(@RequestBody User user) {
+public ResponseEntity<?> createGame(@RequestBody User user) {////////////COMPROBARR QUE LE PASO EL USER ENTERO Y NO SOLO EL USERNAME, PASSWORD YA QUE LE DI A INICIAR SESION
     try {
         Game game = gameWebSocketService.createGame(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(game);
