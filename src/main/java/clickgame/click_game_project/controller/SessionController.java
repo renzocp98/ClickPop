@@ -35,7 +35,7 @@ public class SessionController {
         }
 
         session.setAttribute("user", existingUser); 
-        return ResponseEntity.ok("Inicio de sesión exitoso");
+        return ResponseEntity.ok(existingUser);
     }   
 
     @PostMapping("/logout")
