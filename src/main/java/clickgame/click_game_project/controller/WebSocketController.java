@@ -22,7 +22,6 @@ public class WebSocketController {
         int y = clickGameMessage.getY();
         boolean isValid = gameWebSocketService.clickValidation(x, y);
         int points = gameWebSocketService.controlScore(x, y);
-
         if (!isValid) {
             return new ClickGameResponse(false, points);
         }
