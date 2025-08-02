@@ -65,15 +65,31 @@ public class GameWebSocketServiceImpl implements GameWebSocketService{
     }
 
    @Override
-    public boolean compareGamePoint(int x, int y) {
-        int radiusSquared = 8 * 8;
+   public boolean compareGamePoint(int x, int y) {
+    int radiusSquared = 8 * 8;
 
-        return points.stream().anyMatch(point -> {
-            int dx = x - point[0];
-            int dy = y - point[1];
-            return dx * dx + dy * dy <= radiusSquared;
-        });
+    for (int i = 0; i < points.size(); i++) {
+        int[] point = points.get(i);
+        int dx = x - point[0];
+        int dy = y - point[1];
+        if (dx * dx + dy * dy <= radiusSquared) {
+            points.remove(i); // Eliminamos el punto que fue alcanzado
+            return true;
+        }
+    }
+
+    return false;
 }
+
+    //public boolean compareGamePoint(int x, int y) {
+    //    int radiusSquared = 8 * 8;
+//
+    //    return points.stream().anyMatch(point -> {
+    //        int dx = x - point[0];
+    //        int dy = y - point[1];
+    //        return dx * dx + dy * dy <= radiusSquared;
+    //    });
+    //}
 
 
     
