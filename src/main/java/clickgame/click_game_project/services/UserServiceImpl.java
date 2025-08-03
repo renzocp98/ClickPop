@@ -74,7 +74,6 @@ public class UserServiceImpl implements UserService {
     }
 
     
-    //usar el metodo update para buscaar por Username, no tiene sentido que se busque por id, es solo para la base de datos
-    //Nunca usaremos a nivel externo el id, es para tener un registro de lo que se hace a poder guardaarlo en la BBDD,
+   
 
 }

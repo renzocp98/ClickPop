@@ -81,17 +81,6 @@ public class GameWebSocketServiceImpl implements GameWebSocketService{
     return false;
 }
 
-    //public boolean compareGamePoint(int x, int y) {
-    //    int radiusSquared = 8 * 8;
-//
-    //    return points.stream().anyMatch(point -> {
-    //        int dx = x - point[0];
-    //        int dy = y - point[1];
-    //        return dx * dx + dy * dy <= radiusSquared;
-    //    });
-    //}
-
-
     
     @Override
     public boolean isOutOfLimit(int x, int y) {
@@ -142,6 +131,26 @@ public class GameWebSocketServiceImpl implements GameWebSocketService{
        messagingTemplate.convertAndSend("/backsend/points", pointsOnGame);
    
        return game;
+    }
+
+    @Override
+    public Game findById(int id) {
+
+        Optional<Game> gameExist = gameRepository.findById(id);
+        if(gameExist.isPresent()){
+            Game actualGame = gameExist.orElseThrow();
+            return actualGame;
+        }
+        return null;
+    }
+
+
+
+    @Override
+    public void AddScore(Game game, int score) {
+        game.setScore(score);
+        gameRepository.save(game);
+        
     }
 
 
