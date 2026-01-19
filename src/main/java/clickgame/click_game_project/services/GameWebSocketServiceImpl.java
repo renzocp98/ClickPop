@@ -31,7 +31,7 @@ public class GameWebSocketServiceImpl implements GameWebSocketService{
     private int score = 0;    
     private int width = 300;  
     private int height = 300; 
-    private int npoint = 100;    
+    private int npoint = 15;    
     private boolean goodPoint;
 
     private List<int[]> points = new ArrayList<>();
