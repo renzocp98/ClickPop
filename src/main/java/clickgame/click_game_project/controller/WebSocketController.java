@@ -15,19 +15,17 @@ public class WebSocketController {
     @Autowired
     private GameWebSocketService gameWebSocketService;
 
-    @MessageMapping("/registerClick")// El frontend envía clicks a "/click/registerClick"
-    @SendTo("/backsend/score")// La respuesta del backend se envía a "/backsend/game"
-    private ClickGameResponse handlerClicks (ClickGameMessage clickGameMessage){
-        int x = clickGameMessage.getX();
-        int y = clickGameMessage.getY();
-        boolean isValid = gameWebSocketService.clickValidation(x, y);
-        int points = gameWebSocketService.controlScore(x, y);
-        if (!isValid) {
-            return new ClickGameResponse(false, points);
-        }
-        return new ClickGameResponse(true, points);
-    
-    }
+    @MessageMapping("/registerClick")  // El frontend envía clicks a "/click/registerClick"
+    @SendTo("/backsend/score")         // La respuesta del backend se envía a "/backsend/score"
+    public ClickGameResponse handlerClicks(ClickGameMessage clickGameMessage) {
+        int gameId = clickGameMessage.getGameId();
+        int x      = clickGameMessage.getX();
+        int y      = clickGameMessage.getY();
 
+        boolean isValid = gameWebSocketService.clickValidation(gameId, x, y);
+        int score       = gameWebSocketService.controlScore(gameId, isValid);
+
+        return new ClickGameResponse(isValid, score);
+    }
 
 }

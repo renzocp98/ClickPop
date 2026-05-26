@@ -1,5 +1,7 @@
 package clickgame.click_game_project.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,11 +36,13 @@ public ResponseEntity<?> createGame(@RequestBody User user) {
 }
 
 @PutMapping("/score/{score}")
-public void AddScore(@RequestBody Game game, @PathVariable int score){
-    
-    Game gameExistBBDD = gameWebSocketService.findById(game.getId());
-    gameWebSocketService.AddScore(gameExistBBDD, score);
-
+public ResponseEntity<?> AddScore(@RequestBody Game game, @PathVariable int score){
+    Optional<Game> gameExist = gameWebSocketService.findById(game.getId());
+    if (gameExist.isEmpty()) {
+        return ResponseEntity.notFound().build();
+    }
+    gameWebSocketService.AddScore(gameExist.get(), score);
+    return ResponseEntity.ok().build();
 }
 
     

@@ -1,5 +1,6 @@
 package clickgame.click_game_project.services;
 
+import java.util.Optional;
 
 import clickgame.click_game_project.entities.Game;
 import clickgame.click_game_project.entities.User;
@@ -7,13 +8,13 @@ import clickgame.click_game_project.models.PointsOnGame;
 
 public interface GameWebSocketService {
     boolean isOutOfLimit(int x, int y);
-    int controlScore(int x, int y);
-    boolean clickValidation(int x, int y);
-    Game save(Game game);
-    void delete(int id);
-    PointsOnGame RandomPoints();
+    boolean clickValidation(int gameId, int x, int y);
+    boolean compareGamePoint(int gameId, int x, int y);
+    int controlScore(int gameId, boolean isValid);
+    PointsOnGame RandomPoints(int gameId);
     Game createGame(User user);
-    boolean compareGamePoint(int x, int y);
-    Game findById(int id);
+    Game save(Game game);
+    Optional<Game> findById(int id);
     void AddScore(Game game, int score);
+    void delete(int id);
 }

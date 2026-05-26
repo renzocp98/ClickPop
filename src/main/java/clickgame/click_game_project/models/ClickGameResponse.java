@@ -12,11 +12,11 @@ public class ClickGameResponse {
         this.points = points;
     }
 
-    public boolean getMessage() {
+    public boolean getValid() {
         return this.valid;
     }
 
-    public void setMessage(boolean valid) {
+    public void setValid(boolean valid) {
         this.valid = valid;
     }
 
