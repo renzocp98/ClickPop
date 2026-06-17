@@ -3,6 +3,7 @@ package clickgame.click_game_project.repositories;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -80,10 +81,25 @@ public class UserRepositoryTests {
         List<User> listUsers = (List<User>) userRepository.findAll();
 
         assertThat(listUsers).isNotEmpty();
-        assertThat(listUsers.size()).isEqualTo(2);        
+        assertThat(listUsers.size()).isEqualTo(2);
 
     }
 
-    
+    @Test
+    void testFindByUsername_returnsUser_whenExists() {
+        userRepository.save(user);
+
+        Optional<User> result = userRepository.findByUsername("Renzo");
+
+        assertThat(result).isPresent();
+        assertThat(result.get().getUsername()).isEqualTo("Renzo");
+    }
+
+    @Test
+    void testFindByUsername_returnsEmpty_whenNotExists() {
+        Optional<User> result = userRepository.findByUsername("doesNotExist");
+
+        assertThat(result).isEmpty();
+    }
 
 }

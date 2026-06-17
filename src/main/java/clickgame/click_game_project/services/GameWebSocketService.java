@@ -10,6 +10,7 @@ public interface GameWebSocketService {
     boolean isOutOfLimit(int x, int y);
     boolean clickValidation(int gameId, int x, int y);
     boolean compareGamePoint(int gameId, int x, int y);
+    boolean isGameFinished(int gameId);
     int controlScore(int gameId, boolean isValid);
     PointsOnGame RandomPoints(int gameId);
     Game createGame(User user);

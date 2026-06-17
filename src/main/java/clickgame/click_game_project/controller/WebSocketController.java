@@ -22,10 +22,11 @@ public class WebSocketController {
         int x      = clickGameMessage.getX();
         int y      = clickGameMessage.getY();
 
-        boolean isValid = gameWebSocketService.clickValidation(gameId, x, y);
-        int score       = gameWebSocketService.controlScore(gameId, isValid);
+        boolean isValid  = gameWebSocketService.clickValidation(gameId, x, y);
+        int score        = gameWebSocketService.controlScore(gameId, isValid);
+        boolean finished = gameWebSocketService.isGameFinished(gameId);
 
-        return new ClickGameResponse(isValid, score);
+        return new ClickGameResponse(isValid, score, finished);
     }
 
 }

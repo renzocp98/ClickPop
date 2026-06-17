@@ -4,12 +4,14 @@ public class ClickGameResponse {
 
     private boolean valid;
     private int points;
-    
+    private boolean finished;
+
     public ClickGameResponse() {}
 
-    public ClickGameResponse(boolean valid, int points) {
+    public ClickGameResponse(boolean valid, int points, boolean finished) {
         this.valid = valid;
         this.points = points;
+        this.finished = finished;
     }
 
     public boolean getValid() {
@@ -27,7 +29,15 @@ public class ClickGameResponse {
     public void setPoints(int points) {
         this.points = points;
     }
-    
+
+    public boolean getFinished() {
+        return this.finished;
+    }
+
+    public void setFinished(boolean finished) {
+        this.finished = finished;
+    }
+
 
 
 }

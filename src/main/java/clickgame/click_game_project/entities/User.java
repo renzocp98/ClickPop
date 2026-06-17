@@ -2,6 +2,8 @@ package clickgame.click_game_project.entities;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,6 +29,7 @@ public class User {
     @Column(nullable = false)
     private String username;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @NotBlank(message = "La contraseña es obligatoria")
     @Size(min = 4, message = "La contraseña debe tener al menos 4 caracteres")
     private String password;

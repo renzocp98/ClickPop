@@ -24,7 +24,7 @@ public class GameWebSocketServiceImpl implements GameWebSocketService {
     private static final int BOARD_WIDTH  = 300;
     private static final int BOARD_HEIGHT = 300;
     private static final int NUM_POINTS   = 15;
-    private static final int CLICK_RADIUS = 8;
+    private static final int CLICK_RADIUS = 15;
     private static final int MISS_PENALTY = 2;
 
     // Estado aislado por partida: cada gameId tiene su propio score y sus propios puntos
@@ -86,6 +86,13 @@ public class GameWebSocketServiceImpl implements GameWebSocketService {
 
 
     @Override
+    public boolean isGameFinished(int gameId) {
+        List<int[]> points = pointsByGame.get(gameId);
+        return points != null && points.isEmpty();
+    }
+
+
+    @Override
     public boolean clickValidation(int gameId, int x, int y) {
         if (isOutOfLimit(x, y)) return false;
         return compareGamePoint(gameId, x, y);
@@ -108,7 +115,7 @@ public class GameWebSocketServiceImpl implements GameWebSocketService {
 
     @Override
     public Game createGame(User user) {
-        User existUser = userRepository.findById(user.getId())
+        User existUser = userRepository.findById(user.getId())  
             .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
         Game game = new Game();
